@@ -1,0 +1,211 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+#nav-main li {
+  padding: 0.75rem;
+}
+
+.btn-outline {
+  @apply border-2 border-transparent rounded-sm px-3 py-1 transition;
+}
+
+.btn-2 {
+  @apply bg-gray-300 px-4 py-3 font-semibold text-center rounded-sm block;
+}
+
+.btn-2:hover {
+  @apply bg-gray-400;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.forecast {
+  position: relative;
+  background-color: #f4f4f4;
+  padding: 16px 24px 24px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.test-card__content {
+  height: 12rem;
+  @apply flex justify-center;
+}
+
+#answer-form input[type="text"] {
+  -webkit-appearance: none;
+  border-radius: 0;
+  display: block;
+  width: 100%;
+  height: 3em;
+  font-size: 1.5em;
+  line-height: 1em;
+  text-align: center;
+  border: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 3px 3px 0 #e1e1e1;
+  -moz-box-shadow: 3px 3px 0 #e1e1e1;
+  box-shadow: 3px 3px 0 #e1e1e1;
+}
+
+[lang="ja"] {
+  font-family: "Hiragino Kaku Gothic Pro", "Meiryo", "Source Han Sans Japanese",
+    "NotoSansCJK", "TakaoPGothic", "Yu Gothic", "ヒラギノ角ゴ Pro W3",
+    "メイリオ", "Osaka", "MS PGothic", "ＭＳ Ｐゴシック", "Noto Sans JP",
+    sans-serif;
+}
+
+.nextBtnCustom,
+.prevBtnCustom {
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: #3f3d3d;
+  line-height: 0;
+  display: block;
+  position: fixed;
+  bottom: 5%;
+  transition: all 0.3s linear;
+  z-index: 1;
+  color: #fff;
+  text-decoration: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  @apply px-2 py-4 shadow-xs rounded-sm;
+}
+
+.cardsubmit {
+  position: absolute;
+  top: 35%;
+  right: 1.5%;
+}
+
+.controlBtn {
+  position: fixed;
+  bottom: 2%;
+}
+
+.controlBtnLeft {
+  left: 1%;
+}
+
+.controlBtnRight {
+  right: 1%;
+}
+
+.slideButton {
+  position: absolute;
+  bottom: 2%;
+  right: 2%;
+}
+
+.slide {
+  height: 0;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.slideDown {
+  height: auto;
+}
+
+#resultIcon {
+  visibility: hidden;
+  position: absolute;
+  top: 25%;
+  left: 45%;
+}
+
+.resultIconVisible {
+  visibility: visible !important;
+  animation: resultAnimation 2s ease 0 1;
+}
+
+@keyframes resultAnimation {
+  from {
+    top: 25%;
+  }
+  to {
+    top: 20%;
+  }
+}
+
+/* level-page */
+
+.level-box-header {
+  font-size: 1.7rem;
+  padding: 1.5rem;
+  color: #999;
+  background-color: #bbbaba;
+}
+
+ul.single-character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(113px, 1fr));
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.multi-character-grid {
+  display: "block";
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.single-character-grid li.character-item {
+  display: inline-flex;
+  padding: 1rem 2.5rem;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+ul.multi-character-grid li.character-item a {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul.single-character-grid li.character-item span.character {
+  font-size: 4rem;
+  margin-bottom: 2;
+}
+
+ul.multi-character-grid li.character-item span.character {
+  font-size: 2rem;
+}
+
+ul.single-character-grid li[class|="radical"] {
+  @apply bg-primary;
+  border-top: 1px solid #88d7ff;
+  border-bottom: 1px solid #069;
+  border-left: 1px solid #88d7ff;
+}
+
+ul.single-character-grid li[class|="kanji"] {
+  @apply bg-secondary;
+  border-top: 1px solid #f6c;
+  border-bottom: 1px solid #cc0088;
+  border-left: 1px solid #f6c;
+}
+
+ul.multi-character-grid li[class|="vocabulary"] {
+  @apply bg-tertiary;
+  border-top: 1px solid #c655ff;
+  border-bottom: 1px solid #8800cc;
+}
