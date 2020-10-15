@@ -11,30 +11,44 @@ class Header extends React.Component {
     else this.props.performUpdatesInQueue();
   }
 
+  mainMenuRef = React.createRef();
+
+  toggleMenu() {
+    const mainMenu = this.mainMenuRef.current;
+    if(mainMenu.style.width === "0px") {
+      mainMenu.style.width = "200px";
+    } else {
+      mainMenu.style.width = "0px";
+    }
+  }
+
   renderNav = () => {
     if (this.props.user.isLoggedIn) {
       return (
-        <nav id="nav-main" className="md:block md:self-center mr-4">
-          <ul className="flex text-gray-600">
+        <nav id="nav-main" className="self-center mr-4">
+          <button onClick={() => this.toggleMenu()} id="nav-toggle" className="block md:hidden">
+            <i className="fa fa-bars text-gray-400" aria-hidden="true"></i>
+          </button>
+          <ul ref={this.mainMenuRef} className="flex text-gray-600">
             <li>
-              <Link className="btn-outline hover:border-gray-300 hover:text-gray-700">
+              <button className="btn-outline hover:border-gray-300 hover:text-gray-700">
                 Levels
-              </Link>
+              </button>
             </li>
             <li>
-              <Link className="btn-outline hover:border-primary hover:text-primary">
+              <button className="btn-outline hover:border-primary hover:text-primary">
                 Radicals
-              </Link>
+              </button>
             </li>
             <li>
-              <Link className="btn-outline hover:border-secondary hover:text-secondary">
+              <button className="btn-outline hover:border-secondary hover:text-secondary">
                 Kanji
-              </Link>
+              </button>
             </li>
             <li>
-              <Link className="btn-outline hover:border-tertiary hover:text-tertiary">
+              <button className="btn-outline hover:border-tertiary hover:text-tertiary">
                 Vocabulary
-              </Link>
+              </button>
             </li>
           </ul>
         </nav>

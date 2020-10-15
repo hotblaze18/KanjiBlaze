@@ -7,6 +7,7 @@ import Header from "./Header";
 import { Link } from "react-router-dom";
 import ReviewsPanel from "./ReviewsPanel";
 import ReviewsForecast from "./ReviewsForecast";
+import LevelProgress from "./LevelProgress";
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -50,10 +51,11 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Header />
-        <div className="grid py-10 md:grid-cols-3 px-10 w-full col-gap-8">
+        <div id="dashboard" className="grid py-10 grid-cols-2 md:grid-cols-3 px-10 w-full col-gap-8 row-gap-8">
           <LessonPanel />
           <ReviewsPanel />
           {this.props.sessionStarted ? this.renderResumeButton() : ""}
+          <LevelProgress />
           <ReviewsForecast />
         </div>
       </div>

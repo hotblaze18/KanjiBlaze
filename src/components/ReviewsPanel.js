@@ -12,7 +12,7 @@ class ReviewsPanel extends React.Component {
 
   render() {
     return (
-      <div className="col-span-1">
+      <div id="review-panel">
         <div className="flex justify-center rounded-md w-full bg-secondary font-semibold h-48">
           <span className=" text-white text-4xl self-center">
             Reviews: {this.props.reviews.length}

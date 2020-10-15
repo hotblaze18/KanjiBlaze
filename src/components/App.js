@@ -11,7 +11,8 @@ import SignupUser from "./SignupUser";
 
 const App = () => (
   <Router history={history}>
-    <Route path="/" exact render={() => <LevelPage level={1} />}></Route>
+    <Route path="/"></Route>
+    <Route path="/levels/:level" exact component={LevelPage}></Route>
     <Route path="/login" exact component={LoginUser}></Route>
     <Route path="/signup" exact component={SignupUser}></Route>
     <Route path="/dashboard" exact component={Dashboard}></Route>

@@ -2,103 +2,31 @@ import React from "react";
 import { connect } from "react-redux";
 import levels from "../info";
 import Header from "./Header";
-import ProgressBar from "./ProgressBar";
+import isEmpty from "lodash/isEmpty";
+import { fetchLevelsInfo } from "../actions/levles.action";
+import LevelBox from "./LevelBox";
 
 const uicards = require("../uicards.json");
 
-const LevelBox = (props) => {
-  const { type, cards, completed, total } = props;
-  let link = "";
-  if (type === "radical") {
-    link = "/radicals/";
-  } else if (type === "kanji") {
-    link = "/kanji/";
-  } else {
-    link = "/vocabulary/";
+
+
+
+class LevelPage extends React.Component {
+  
+  componentDidMount() {
+    if(isEmpty(this.props.levelsInfo)) {
+      this.props.fetchLevelsInfo();
+    }
+    console.log(this.props);
   }
 
-  const barProps = {
-    height: 20,
-    containerBg: "#c8c8c8",
-    fillerBg: "#474747",
-    completed,
-    total,
-  };
-
-  if (type === "vocabulary") {
-    return (
-      <div>
-        <h2 className="level-box-header">
-          {type[0].toUpperCase() + type.slice(1)}
-        </h2>
-        <ProgressBar {...barProps} />
-        <ul className="multi-character-grid">
-          {cards.map((card) => (
-            <li
-              key={card.cardNo}
-              class={`${type}-${card.cardNo} character-item`}
-            >
-              <a href={`${link}/${card.cardNo}`}>
-                <span class="character" lang="ja">
-                  {card.cardBody}
-                </span>
-                <ul>
-                  <li lang="ja" className="text-center">
-                    {card.kanaReading}
-                  </li>
-                  <li className="text-center">{card.cardMeaning[0]}</li>
-                </ul>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  }
-
-  return (
-    <div className="mb-4">
-      <h2 className="level-box-header">
-        {type[0].toUpperCase() + type.slice(1)}
-      </h2>
-      <ProgressBar {...barProps} />
-      <ul className="single-character-grid">
-        {cards.map((card) => (
-          <li key={card.cardNo} class={`${type}-${card.cardNo} character-item`}>
-            <a href={`${link}/${card.cardNo}`}>
-              <span class="character" lang="ja">
-                {card.cardBody}
-              </span>
-              <ul>
-                <li lang="ja" className="text-center">
-                  {card.mainReading}
-                </li>
-                <li className="text-center">{card.cardMeaning[0]}</li>
-              </ul>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-const LevelPage = (props) => {
-  const radicals = [];
+  getUiCards(level) {
+    const radicals = [];
   const kanji = [];
   const vocabulary = [];
 
-  const start = levels[props.level].start;
-  const end = levels[props.level].end;
-
-  console.log(props.levelsInfo);
-
-  //const radProgress = props.levelsInfo[props.level].radicalProgress;
-  const radTotal = levels[props.level].noOfRadicals;
-  //const kanProgress = props.levelsInfo[props.level].kanjiProgress;
-  const kanTotal = levels[props.level].noOfKanji;
-  //const vocProgress = props.levelsInfo[props.level].vocProgress;
-  const vocTotal = levels[props.level].noOfVocab;
+  const start = levels[level].start;
+  const end = levels[level].end;
 
   for (let i = start; i <= end; i++) {
     if (uicards[i].type === "radical") {
@@ -110,36 +38,60 @@ const LevelPage = (props) => {
     }
   }
 
-  return (
-    <div>
-      <Header />
-      <div className="px-6 py-10 md:px-10">
-        <h1 className="font-light text-5xl mb-10">
-          Level {props.level}
-          <small className="text-3xl ml-3 text-gray-500 font-hairline">
-            RADICALS, KANJI, &amp; VOCABULARY
-          </small>
-        </h1>
-        <LevelBox
-          type="radical"
-          cards={radicals}
-          completed={12}
-          total={radTotal}
-        />
-        <LevelBox type="kanji" cards={kanji} completed={10} total={kanTotal} />
-        <LevelBox
-          type="vocabulary"
-          cards={vocabulary}
-          completed={5}
-          total={vocTotal}
-        />
-      </div>
-    </div>
-  );
-};
+  return { radicals, kanji, vocabulary };
+
+  }
+
+  render() {
+  
+    if(isEmpty(this.props.levelsInfo)) {
+      return "Loading..."
+    }
+    else {
+
+      const level = this.props.match.params.level;
+      const { radicals, kanji, vocabulary } = this.getUiCards(level);
+      const { levelsInfo } = this.props
+
+      const radProgress = levelsInfo[level].radicalProgress;
+      const radTotal = levels[level].noOfRadicals;
+      const kanProgress = levelsInfo[level].kanjiProgress;
+      const kanTotal = levels[level].noOfKanji;
+      const vocProgress = levelsInfo[level].vocabProgress;
+      const vocTotal = levels[level].noOfVocab;
+      
+      return (
+        <div>
+          <Header />
+          <div className="px-6 py-10 md:px-10">
+            <h1 className="font-light text-5xl mb-10">
+              Level {level}
+              <small className="text-3xl ml-3 text-gray-500 font-hairline">
+                RADICALS, KANJI, &amp; VOCABULARY
+              </small>
+            </h1>
+            <LevelBox
+              type="radical"
+              cards={radicals}
+              completed={radProgress}
+              total={radTotal}
+            />
+            <LevelBox type="kanji" cards={kanji} completed={kanProgress} total={kanTotal} />
+            <LevelBox
+              type="vocabulary"
+              cards={vocabulary}
+              completed={vocProgress}
+              total={vocTotal}
+            />
+          </div>
+        </div>
+      );
+    }
+  }
+}
 
 const mapStateToProps = (state) => ({
   levelsInfo: state.levelsInfo,
 });
 
-export default connect(mapStateToProps)(LevelPage);
+export default connect(mapStateToProps, {fetchLevelsInfo})(LevelPage);

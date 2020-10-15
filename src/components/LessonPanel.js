@@ -13,7 +13,7 @@ class LessonPanel extends React.Component {
 
   render() {
     return (
-      <div className="col-span-1">
+      <div id="lesson-panel">
         <div className="flex justify-center rounded-md w-full bg-primary font-semibold h-48">
           <span className=" text-white text-4xl self-center">
             Lessons: {this.props.lessons.length}
