@@ -13,7 +13,6 @@ const LoginUser = (props) => {
 
   return (
     <div>
-      <Header />
       <form onSubmit={submitForm}>
         <div>
           <span>Email:</span>

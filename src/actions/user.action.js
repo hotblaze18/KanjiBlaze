@@ -24,7 +24,7 @@ const loginUser = (email, password, redirect) => {
   };
 };
 
-const fetchUser = (redirect) => {
+const fetchUser = (sucRedirect, failRedirect) => {
   return async (dispatch) => {
     try {
       const res = await axios.get(`${baseURL}/user/me`, settings);
@@ -33,8 +33,9 @@ const fetchUser = (redirect) => {
         type: "FETCH_USER",
         user: { name, email, currLevel },
       });
+      history.push(sucRedirect);
     } catch (e) {
-      history.push(redirect);
+      history.push(failRedirect);
     }
   };
 };

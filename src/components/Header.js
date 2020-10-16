@@ -7,7 +7,7 @@ import { performUpdatesInQueue } from "../actions/updates.action";
 
 class Header extends React.Component {
   componentDidMount() {
-    if (!this.props.user.isLoggedIn) this.props.fetchUser("/login");
+    if (!this.props.user.isLoggedIn) this.props.fetchUser("/dashboard","/");
     else this.props.performUpdatesInQueue();
   }
 
@@ -55,9 +55,9 @@ class Header extends React.Component {
       );
     } else {
       return (
-        <div className="self-center text-gray-600">
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/login">Login</Link>
+        <div className="self-center text-gray-600 mr-4">
+          <Link to="/signup" className="p-4 hover:text-gray-500">Sign Up</Link>
+          <Link to="/login"  className="p-4 hover:text-gray-500">Login</Link>
         </div>
       );
     }
@@ -65,7 +65,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="bg-white h-20 w-full flex justify-between shadow-md mb-4">
+      <div className="bg-white h-20 w-full flex justify-between shadow-md mb-4 z-10">
         <div className="self-center p-5">
           <Link className="text-secondary font-bold text-3xl">KanjiBlaze</Link>
         </div>

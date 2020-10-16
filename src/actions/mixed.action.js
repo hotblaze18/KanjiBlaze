@@ -18,7 +18,7 @@ const fetchCardsAndLevelsInfo = () => {
 const fetchAndMakeSession = (sessionType) => {
   return async (dispatch, getState) => {
     await fetchCardsAndLevelsInfo()(dispatch);
-    await fetchUser("/login")(dispatch);
+    await fetchUser("/dashboard","/")(dispatch);
     if (sessionType === "lesson") {
       createLessonQueue()(dispatch, getState);
     } else {
@@ -28,13 +28,13 @@ const fetchAndMakeSession = (sessionType) => {
   };
 };
 
-//need to fetch levels info first and then update it for progress
-const fetchAnddoProgress = () => {
-  return async (dispatch, getState) => {
-    await fetchCardsAndLevelsInfo()(dispatch);
-    doProgressUpdate()(dispatch, getState);
-  };
-};
+// //need to fetch levels info first and then update it for progress
+// const fetchAnddoProgress = () => {
+//   return async (dispatch, getState) => {
+//     await fetchCardsAndLevelsInfo()(dispatch);
+//     doProgressUpdate()(dispatch, getState);
+//   };
+// };
 
 const unlockCardsAndUpdate = () => {
   return (dispatch, getState) => {

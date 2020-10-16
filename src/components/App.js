@@ -8,10 +8,12 @@ import Session from "./Session";
 import LessonCard from "./LessonCard";
 import LevelPage from "./LevelPage";
 import SignupUser from "./SignupUser";
+import LandingPage from "./LandingPage";
+
 
 const App = () => (
   <Router history={history}>
-    <Route path="/"></Route>
+    <Route path="/" exact component={LandingPage}></Route>
     <Route path="/levels/:level" exact component={LevelPage}></Route>
     <Route path="/login" exact component={LoginUser}></Route>
     <Route path="/signup" exact component={SignupUser}></Route>
