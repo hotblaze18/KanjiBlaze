@@ -18,8 +18,9 @@ const loginUser = (email, password, redirect) => {
         type: "LOGIN_USER",
         user: { name, email, currLevel },
       });
+      history.push(redirect)
     } catch (e) {
-      history.push(redirect);
+      
     }
   };
 };
