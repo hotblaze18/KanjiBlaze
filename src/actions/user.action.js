@@ -1,18 +1,19 @@
 import history from "../history";
 import axios from "axios";
+import { trackPromise } from "react-promise-tracker";
 import { baseURL, settings } from "../api/kanjiblaze";
 
 const loginUser = (email, password, redirect) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(
+      const res = await trackPromise(axios.post(
         `${baseURL}/user/login`,
         {
           email,
           password,
         },
         settings
-      );
+      ));
       const { name, currLevel } = res.data.data.user;
       dispatch({
         type: "LOGIN_USER",
@@ -28,7 +29,7 @@ const loginUser = (email, password, redirect) => {
 const fetchUser = (sucRedirect, failRedirect) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get(`${baseURL}/user/me`, settings);
+      const res = await trackPromise(axios.get(`${baseURL}/user/me`, settings));
       const { name, email, currLevel } = res.data.data.user;
       dispatch({
         type: "FETCH_USER",
@@ -44,7 +45,7 @@ const fetchUser = (sucRedirect, failRedirect) => {
 const signUpUser = (name, email, password, redirect) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post(
+      const res = trackPromise(await axios.post(
         `${baseURL}/user/create`,
         {
           name,
@@ -52,7 +53,7 @@ const signUpUser = (name, email, password, redirect) => {
           password,
         },
         settings
-      );
+      ));
       const { currLevel } = res.data.data.user;
       dispatch({
         type: "FETCH_USER",

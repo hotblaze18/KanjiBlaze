@@ -8915,6 +8915,18 @@ react-modal@^3.11.2:
     react-lifecycles-compat "^3.0.0"
     warning "^4.0.3"
 
+react-promise-loader@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-promise-loader/-/react-promise-loader-1.0.5.tgz#b5fab14b579a793350aebfb2cc7b2dd0c2f4fbbd"
+  integrity sha512-nH5PfdPvD2dVy6TTDWlgLn1gj8Y95yWi8MH6tck28Lx8F2uUI0msVUJ4bVUjth1VUt0ChSE4zLxqr6r65b9MiQ==
+  dependencies:
+    prop-types "^15.7.2"
+
+react-promise-tracker@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-promise-tracker/-/react-promise-tracker-2.1.0.tgz#a8ac2ca5322ca60f83fa7a00ad9d99bfbbdb8434"
+  integrity sha512-1LQSGAnFF4o++iPFgeBrMpS+ZHQg8ZGl9Zuf70v+OoLxuOnUeLCP7ugma+InBCUZzPnSLyWTLt/jyW+FAy5ELQ==
+
 react-redux@^7.2.1:
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.2.1.tgz#8dedf784901014db2feca1ab633864dee68ad985"

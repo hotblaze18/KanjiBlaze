@@ -1,5 +1,7 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
+import Loader from "react-promise-loader";
+import { usePromiseTracker } from "react-promise-tracker"
 
 import Dashboard from "./Dashboard";
 import LoginUser from "./LoginUser";
@@ -13,6 +15,7 @@ import LandingPage from "./LandingPage";
 
 const App = () => (
   <Router history={history}>
+    <Loader promiseTracker={usePromiseTracker} />
     <Route path="/" exact component={LandingPage}></Route>
     <Route path="/levels/:level" exact component={LevelPage}></Route>
     <Route path="/login" exact component={LoginUser}></Route>
