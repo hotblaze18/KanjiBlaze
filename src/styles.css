@@ -4,10 +4,6 @@
 
 @tailwind utilities;
 
-#nav-main li {
-  padding: 0.75rem;
-}
-
 .btn-outline {
   @apply border-2 border-transparent rounded-sm px-3 py-1 transition;
 }
@@ -23,6 +19,10 @@
 textarea:focus,
 input:focus {
   outline: none;
+}
+
+.visible {
+  display: block !important;
 }
 
 /* -------------------------------------- */
@@ -171,9 +171,27 @@ input:focus {
   border-radius: 5px;
 }
 
+/* ---------------------- */
+
 .test-card__content {
-  height: 12rem;
+  position: relative;
+  height: 14rem;
   @apply flex justify-center;
+}
+
+#testCardNext,
+#testCardDontKnow {
+  position: absolute;
+  bottom: 0%;
+}
+
+#testCardNext {
+  display: none;
+  right: 0%;
+}
+
+#testCardDontKnow {
+  left: 0%;
 }
 
 #answer-form input[type="text"] {
@@ -378,6 +396,50 @@ ul.multi-character-grid li[class|="vocabulary"] {
 }
 
 /* ------------- ---------------- ------------------ */
+
+#main-menu {
+  background-color: #fff;
+}
+
+#main-menu {
+  align-items: center;
+}
+
+#main-menu li {
+  padding: 0.5rem;
+}
+
+#profileBtn {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  line-height: 2rem;
+}
+
+.profile-dropdown {
+  @apply bg-white shadow-sm;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  visibility: hidden;
+  padding: 1rem;
+  right: 0;
+  transition: all 0.5s;
+  overflow: hidden;
+}
+
+.profile-dropdown li {
+  padding: 1rem 1.5rem !important;
+}
+
+.profile-dropdown-visible {
+  visibility: visible;
+}
 
 #dashboard {
   grid-template-rows: 4;

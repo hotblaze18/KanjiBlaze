@@ -22,14 +22,19 @@ class Header extends React.Component {
     }
   }
 
+  toggleProfileDropdown() {
+    const dropdown = document.querySelector('.profile-dropdown');
+    dropdown.classList.toggle('profile-dropdown-visible');
+  }
+
   renderNav = () => {
     if (this.props.user.isLoggedIn) {
       return (
-        <nav id="nav-main" className="self-center mr-4">
+        <nav id="nav-main" className="self-center mr-8">
           <button onClick={() => this.toggleMenu()} id="nav-toggle" className="block md:hidden">
             <i className="fa fa-bars text-gray-400" aria-hidden="true"></i>
           </button>
-          <ul ref={this.mainMenuRef} className="flex text-gray-600">
+          <ul id="main-menu" ref={this.mainMenuRef} className="flex text-gray-600">
             <li>
               <button className="btn-outline hover:border-gray-300 hover:text-gray-700">
                 Levels
@@ -49,6 +54,16 @@ class Header extends React.Component {
               <button className="btn-outline hover:border-tertiary hover:text-tertiary">
                 Vocabulary
               </button>
+            </li>
+            <li className="relative">
+              <button onClick={this.toggleProfileDropdown} id="profileBtn" className="bg-tertiary">
+                {this.props.user.name.slice(0, 1).capitalize()}
+              </button>
+              <ul className="profile-dropdown">
+                <li>Profile</li>
+                <li>Settings</li>
+                <li>Sign out</li>
+              </ul>
             </li>
           </ul>
         </nav>

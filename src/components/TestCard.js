@@ -82,7 +82,7 @@ class TestCard extends React.Component {
       this.inputRef.current.value = toHiragana(this.inputRef.current.value);
   }
 
-  isCorrectAnswer() {
+  isCorrectAnswer(input) {
     let isCorrect = false;
 
     if (this.props.stype === "meaning") {
@@ -90,7 +90,7 @@ class TestCard extends React.Component {
         meaning.toLowerCase()
       );
       const similarity = findBestMatch(
-        this.inputRef.current.value.toLowerCase(),
+        input.toLowerCase(),
         meanings
       );
       similarity.ratings.forEach(({ rating }) => {
@@ -109,7 +109,7 @@ class TestCard extends React.Component {
       }
 
       readings.forEach((reading) => {
-        if (reading === this.inputRef.current.value) isCorrect = true;
+        if (reading === input.value) isCorrect = true;
       });
     }
     return isCorrect;
@@ -277,12 +277,23 @@ class TestCard extends React.Component {
     }
   }
 
-  onSubmit(e) {
+  onDontKnowPress(e) {
+    const dontBtn = document.getElementById("testCardDontKnow");
+    dontBtn.style.display = "none";
+    this.onSubmit(e, true);
+  }
+
+  onSubmit(e, dontKnow=undefined) {
     if (!this.props.card) return;
     //prevent default form submission
     e.preventDefault();
+    let input = this.inputRef.current.value;
+    //if dont know pressed then set a wrong answer
+    if(dontKnow !== undefined) {
+      input = "chigau"
+    }
     //if input is empty return
-    if (this.inputRef.current.value === "") {
+    if (input === "") {
       return;
     }
 
@@ -295,12 +306,13 @@ class TestCard extends React.Component {
     let resultColor;
     this.submitButtonRef.current.disabled = true;
     this.inputRef.current.disabled = true;
-
+    const nextBtn = document.getElementById("testCardNext");
+    const dontBtn = document.getElementById("testCardDontKnow");
     //Increment the timesAttempted of current lesson
     lesson.timesAttempted += 1;
 
     //Check correctness of submitted anser
-    const isCorrect = this.isCorrectAnswer();
+    const isCorrect = this.isCorrectAnswer(input);
 
     if (isCorrect) {
       lesson.timesCorrect += 1;
@@ -338,6 +350,8 @@ class TestCard extends React.Component {
         this.inputRef.current.value = "";
         this.inputRef.current.disabled = false;
         this.submitButtonRef.current.disabled = false;
+        nextBtn.classList.remove("visible");
+        dontBtn.style.display = "block";
       }
       if (this.state.referenceCard !== null) {
         this.toggleReferenceCard();
@@ -345,13 +359,17 @@ class TestCard extends React.Component {
     };
     //proceed to next card
     const proceed = (e) => {
-      if (e.key === "Enter") {
+      console.log(e);
+      if (e.key === "Enter" || e.target === nextBtn) {
         clearUnwanted();
         window.removeEventListener("keypress", proceed);
+        nextBtn.removeEventListener("click", proceed);
       }
     };
-    //Proceed on pressing enter event
+    //Proceed on pressing enter event or proceed on clicking next button;
     window.addEventListener("keypress", proceed);
+    nextBtn.classList.add("visible");
+    nextBtn.addEventListener("click", proceed);
     //set the display of the result none automatically after some time
     setTimeout(() => {
       if (this.resultRef.current !== null) {
@@ -367,6 +385,8 @@ class TestCard extends React.Component {
           <span className="font-bold text-6xl text-white self-center" lang="ja">
             {this.renderCardContent()}
           </span>
+          <button id="testCardNext" className="p-2 text-white">Next</button>
+          <button onClick={(e) => this.onDontKnowPress(e)} id="testCardDontKnow" className="p-2 text-white">Don't Know</button>
         </div>
         <div className="bg-gray-800 text-2xl text-center mb-2 shadow-sm text-white">
           <span className="py-1">{this.getCardFooter()}</span>
