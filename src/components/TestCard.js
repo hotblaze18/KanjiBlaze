@@ -107,16 +107,14 @@ class TestCard extends React.Component {
       } else if (type === "vocabulary") {
         readings = card.kanaReading.split(",").map((r) => r.trim());
       }
-
       readings.forEach((reading) => {
-        if (reading === input.value) isCorrect = true;
+        if (reading === input) isCorrect = true;
       });
     }
     return isCorrect;
   }
 
   getPromotion(lesson, correct) {
-    console.log(correct, lesson);
     if (correct === true) {
       if (lesson.type === "radical") {
         if (lesson.timesAttempted === 1) return 1;
@@ -136,7 +134,6 @@ class TestCard extends React.Component {
   }
 
   showResult(promotionVal, correct) {
-    console.log(promotionVal, correct);
     const wrongIcon = (
       <div className="w-12 h-12 p-4 flex justify-center rounded-full bg-red-400">
         <i
@@ -191,12 +188,10 @@ class TestCard extends React.Component {
     const card = this.props.cards[this.props.card.cardNo];
     const currLevel = this.props.currLevel;
     const { timesIncorrect } = lesson;
-    console.log(card, lesson);
     // Set demoting factors.
     const curr_srs_stage = card.cardProgress;
     const incorrect_factor = Math.ceil(timesIncorrect / 2);
     const srs_penalty_factor = card.cardProgress < 5 ? 1 : 2;
-    console.log(promotionVal);
     //if type of session is lesson then just set learned true so that card can be review from now onwards
     if (type === "lesson" && promotionVal !== 0) {
       card.learned = true;
@@ -359,7 +354,6 @@ class TestCard extends React.Component {
     };
     //proceed to next card
     const proceed = (e) => {
-      console.log(e);
       if (e.key === "Enter" || e.target === nextBtn) {
         clearUnwanted();
         window.removeEventListener("keypress", proceed);
