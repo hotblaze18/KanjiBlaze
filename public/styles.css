@@ -22836,11 +22836,11 @@ video {
   }
 }
 
-@media screen and (max-width: 640px) {
+/* @media screen and (max-width: 640px) {
   html {
     font-size: 70%;
   }
-}
+} */
 
 /*------------------*/
 
