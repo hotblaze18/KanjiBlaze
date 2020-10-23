@@ -14,12 +14,11 @@ class Header extends React.Component {
   mainMenuRef = React.createRef();
 
   toggleMenu() {
+    const toggleIcon = document.getElementById("nav-toggle-icon");
+    toggleIcon.classList.toggle("open");
     const mainMenu = this.mainMenuRef.current;
-    if(mainMenu.style.width === "0px") {
-      mainMenu.style.width = "200px";
-    } else {
-      mainMenu.style.width = "0px";
-    }
+    mainMenu.classList.toggle("w-48");
+    mainMenu.classList.toggle("visible");
   }
 
   toggleProfileDropdown() {
@@ -32,9 +31,13 @@ class Header extends React.Component {
       return (
         <nav id="nav-main" className="self-center mr-8">
           <button onClick={() => this.toggleMenu()} id="nav-toggle" className="block md:hidden">
-            <i className="fa fa-bars text-gray-400" aria-hidden="true"></i>
+          <div id="nav-toggle-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
           </button>
-          <ul id="main-menu" ref={this.mainMenuRef} className="flex text-gray-600">
+          <ul id="main-menu" ref={this.mainMenuRef} className="flex text-gray-600 bg-white w-0 md:w-auto">
             <li>
               <button className="btn-outline hover:border-gray-300 hover:text-gray-700">
                 Levels
