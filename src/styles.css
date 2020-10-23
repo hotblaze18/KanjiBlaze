@@ -200,7 +200,7 @@ input:focus {
 }
 
 #testCardNext {
-  display: none;
+  visibility: hidden;
   right: 0%;
 }
 

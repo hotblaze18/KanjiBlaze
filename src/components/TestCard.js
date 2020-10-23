@@ -392,7 +392,7 @@ class TestCard extends React.Component {
           <form onSubmit={(e) => this.onSubmit(e)} className="relative">
             <input
               ref={this.inputRef}
-              onKeyUp={(e) => setTimeout(() => this.inputKeyPress(e), 200)}
+              onKeyUp={(e) => setTimeout(() => this.inputKeyPress(e), 700)}
               autoCapitalize="none"
               autoComplete="off"
               autoCorrect="off"
