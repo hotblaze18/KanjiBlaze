@@ -23420,6 +23420,7 @@ ul.multi-character-grid li[class|="vocabulary"] {
   grid-column-end: -1;
   grid-row-start: 3;
   grid-row-end: 4;
+  background-color: #f4f4f4;
 }
 
 @media screen and (min-width: 768px) {
