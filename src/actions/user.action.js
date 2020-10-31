@@ -45,7 +45,7 @@ const fetchUser = (sucRedirect, failRedirect) => {
 const signUpUser = (name, email, password, redirect) => {
   return async (dispatch) => {
     try {
-      const res = trackPromise(await axios.post(
+      const res = await trackPromise(axios.post(
         `${baseURL}/user/create`,
         {
           name,
