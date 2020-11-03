@@ -2,10 +2,11 @@ import React from "react";
 
 const ProgressBar = (props) => {
   const { height, fillerBg, containerBg, completed, total, radius, text, tooltip } = props;
-  console.log(completed, total);
   let percent = Math.ceil(((completed / total) * 100));
   if(percent < 4) {
     percent = 4;
+  } else if(percent > 100) {
+    percent = 100;
   }
   
   let content
