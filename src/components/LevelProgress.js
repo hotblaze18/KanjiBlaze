@@ -36,7 +36,7 @@ class LevelProgress extends React.Component {
         }
 
         return(
-            <div key={cardNo}>
+            <div key={cardNo} class="progress-card">
                 <Link to={`/${type}/${cardNo}`}>
                 <div className={"flex justify-center rounded-sm shadow-sm p-2 mb-2 w-12 h-12" + this.getBg(type)}>
                 <span lang="jp" style={{fontSize:"1.5rem"}} className="text-white self-center">{cardBody ? cardBody : <img src={`/imgs/${cardMeaning[0]}.png`} alt={cardMeaning[0]}></img>}</span>
