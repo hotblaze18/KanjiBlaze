@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { fetchUser } from "../actions/user.action";
+import { fetchUser, signOutUser } from "../actions/user.action";
 import { performUpdatesInQueue } from "../actions/updates.action";
 
 class Header extends React.Component {
@@ -24,6 +24,10 @@ class Header extends React.Component {
   toggleProfileDropdown() {
     const dropdown = document.querySelector('.profile-dropdown');
     dropdown.classList.toggle('profile-dropdown-visible');
+  }
+
+  signOut() {
+    this.props.signOutUser("/");
   }
 
   renderNav = () => {
@@ -65,7 +69,7 @@ class Header extends React.Component {
               <ul className="profile-dropdown">
                 <li>Profile</li>
                 <li>Settings</li>
-                <li>Sign out</li>
+                <li onClick={() => this.signOut()}>Sign out</li>
               </ul>
             </li>
           </ul>
@@ -97,6 +101,6 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { fetchUser, performUpdatesInQueue })(
+export default connect(mapStateToProps, { fetchUser, performUpdatesInQueue, signOutUser })(
   Header
 );
