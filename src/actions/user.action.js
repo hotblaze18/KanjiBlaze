@@ -21,7 +21,7 @@ const loginUser = (email, password, redirect) => {
       });
       history.push(redirect)
     } catch (e) {
-      
+
     }
   };
 };
@@ -66,4 +66,21 @@ const signUpUser = (name, email, password, redirect) => {
   };
 };
 
-export { loginUser, fetchUser, signUpUser };
+const signOutUser = (sucRedirect) => {
+  return async (dispatch) => {
+    try {
+      //remove jwt from the server side.
+      await trackPromise(axios.get(`${baseURL}/user/signout`, settings));
+      //dispatch signout user action.
+      dispatch({ type: "SIGNOUT_USER" });
+      //remove the persisted state from local storage.
+      localStorage.removeItem("state");
+      //redirect to landing page
+      history.push(sucRedirect);
+    } catch (e) {
+
+    }
+  }
+}
+
+export { loginUser, fetchUser, signUpUser, signOutUser };
