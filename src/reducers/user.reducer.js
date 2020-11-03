@@ -13,7 +13,7 @@ export default (user = defaultUserState, action) => {
       return action.user;
     case "LOGIN_USER":
       return { ...user, ...action.user, isLoggedIn: true };
-    case "LOGOUT_USER":
+    case "SIGNOUT_USER":
       return defaultUserState;
     case "FETCH_USER":
       return { ...user, ...action.user, isLoggedIn: true };
