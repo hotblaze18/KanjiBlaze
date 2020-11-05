@@ -6,9 +6,7 @@ import { doProgressUnlockCardsAndMakeLessonQueue } from "../actions/mixed.action
 
 class LessonPanel extends React.Component {
   componentDidMount() {
-    if (this.props.sessionType !== "lesson") {
-      this.props.doProgressUnlockCardsAndMakeLessonQueue();
-    }
+    this.props.doProgressUnlockCardsAndMakeLessonQueue();
   }
 
   render() {
@@ -19,7 +17,7 @@ class LessonPanel extends React.Component {
             Lessons: {this.props.lessons.length}
           </span>
         </div>
-        {!this.props.sessionStarted ? (
+        {!this.props.sessionStarted && this.props.lessons.length > 0  ? (
           <Link className="btn-2 mt-4" to="/lesson/session">
             Start Lesson
           </Link>

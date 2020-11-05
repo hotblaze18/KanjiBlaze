@@ -5,9 +5,7 @@ import { createReviewsQueue } from "../actions/reviews.action";
 
 class ReviewsPanel extends React.Component {
   componentDidMount() {
-    if (this.props.sessionType !== "reviews") {
-      this.props.createReviewsQueue();
-    }
+    this.props.createReviewsQueue();
   }
 
   render() {
@@ -18,7 +16,7 @@ class ReviewsPanel extends React.Component {
             Reviews: {this.props.reviews.length}
           </span>
         </div>
-        {!this.props.sessionStarted ? (
+        {!this.props.sessionStarted && this.props.reviews.length > 0 ? (
           <Link className="btn-2 mt-4" to="/reviews/session">
             Start Reviews
           </Link>
