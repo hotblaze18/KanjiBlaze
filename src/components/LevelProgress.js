@@ -82,7 +82,7 @@ class LevelProgress extends React.Component {
             containerBg: "#c8c8c8",
             fillerBg: "#f100a1",
             completed: levelsInfo[currLevel].kanjiProgress,
-            total: levels[currLevel].noOfKanji,
+            total: kanji.length,
             text: {
                 content: "#completed of #total kanji passed",
                 color: "#fff"

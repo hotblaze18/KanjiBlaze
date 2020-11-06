@@ -23,7 +23,85 @@ class Header extends React.Component {
 
   toggleProfileDropdown() {
     const dropdown = document.querySelector('.profile-dropdown');
-    dropdown.classList.toggle('profile-dropdown-visible');
+    dropdown.classList.toggle('visible');
+  }
+
+  toggleLevelsDropdown() {
+    const dropdown = document.querySelector('.levels_dropdown_grid');
+    dropdown.classList.toggle('visible');
+  }
+
+  toggleRadicalDropdown() {
+    const dropdown = document.querySelector('#radical_dropdown');
+    dropdown.classList.toggle('visible');
+  }
+
+  toggleKanjiDropdown() {
+    const dropdown = document.querySelector('#kanji_dropdown');
+    dropdown.classList.toggle('visible');
+  }
+
+  toggleVocabDropdown() {
+    const dropdown = document.querySelector('#vocab_dropdown');
+    dropdown.classList.toggle('visible');
+  }
+
+  renderLevelDropdownGrid() {
+
+    const items = [];
+    
+    for(let i=1; i<=60; i++) {
+      items.push(<Link key={i} to={`/levels/${i}`}>{i}</Link>)
+    }
+
+    return (
+    <div className="levels_dropdown_grid dropdown shadow-sm" style={{background: "#666"}}>
+      {items}              
+    </div>
+    )
+  }
+
+  renderDropdown(type) {
+    let bg,id;
+    if(type === "radical") {
+      bg = "#00AAFF";
+      id = "radical_dropdown"
+    } else if(type === "kanji") {
+      bg="#FF00AA";
+      id = "kanji_dropdown";
+    } else {
+      bg="#AA00FF"
+      id = "vocab_dropdown"
+    }
+
+    return(
+      <div id={id} class="main_dropdown dropdown" style={{background: bg}}>
+        <Link to={`${type}/levels/1-10`}>
+            <span className="p-2 mr-4"  lang="ja">快 <span className="ml-2" lang="en">Pleasant</span></span>
+            <span className="p-2">Levels 01-10</span>    
+        </Link>
+        <Link to={`${type}/levels/11-20`}>
+            <span className="p-2 mr-4" lang="ja">苦 <span className="ml-2" lang="en">Painful</span></span>
+            <span className="p-2">Levels 11-20</span>
+        </Link>
+        <Link to={`${type}/levels/21-30`}> 
+            <span className="p-2 mr-4" lang="ja">死 <span className="ml-2" lang="en">Death</span></span>
+            <span className="p-2">Levels 21-30</span>
+        </Link>
+      <Link to={`${type}/levels/31-40`}>
+          <span className="p-2 mr-4" lang="ja">地獄 <span className="ml-2" lang="en">Hell</span></span>
+          <span className="p-2">Levels 31-40</span>    
+      </Link>
+      <Link to={`${type}/levels/41-50`}>
+          <span className="p-2 mr-4" lang="ja">天国 <span className="ml-2" lang="en">Paradise</span></span>
+          <span className="p-2">Levels 41-50</span>
+      </Link>
+      <Link to={`${type}/levels/51-60`}>  
+          <span className="p-2 mr-4" lang="ja">現実 <span className="ml-2" lang="en">Reality</span></span>
+          <span className="p-2">Levels 51-60</span>    
+    </Link>
+ </div>
+    );
   }
 
   signOut() {
@@ -43,30 +121,34 @@ class Header extends React.Component {
           </button>
           <ul id="main-menu" ref={this.mainMenuRef} className="flex text-gray-600 bg-white w-0 md:w-auto">
             <li>
-              <button className="btn-outline hover:border-gray-300 hover:text-gray-700">
+              <button onClick={this.toggleLevelsDropdown} className="dropdownBtn btn-outline hover:border-gray-300 hover:text-gray-700">
                 Levels
               </button>
+              {this.renderLevelDropdownGrid()}
             </li>
             <li>
-              <button className="btn-outline hover:border-primary hover:text-primary">
+              <button onClick={this.toggleRadicalDropdown} className="dropdownBtn btn-outline hover:border-primary hover:text-primary">
                 Radicals
               </button>
+              {this.renderDropdown("radical")}
             </li>
             <li>
-              <button className="btn-outline hover:border-secondary hover:text-secondary">
+              <button onClick={this.toggleKanjiDropdown} className="dropdownBtn btn-outline hover:border-secondary hover:text-secondary">
                 Kanji
               </button>
+              {this.renderDropdown("kanji")}
             </li>
             <li>
-              <button className="btn-outline hover:border-tertiary hover:text-tertiary">
+              <button onClick={this.toggleVocabDropdown} className="dropdownBtn btn-outline hover:border-tertiary hover:text-tertiary">
                 Vocabulary
               </button>
+              {this.renderDropdown("vocab")}
             </li>
             <li className="relative">
-              <button onClick={this.toggleProfileDropdown} id="profileBtn" className="bg-tertiary">
+              <button onClick={this.toggleProfileDropdown} id="profileBtn" className="bg-tertiary dropdownBtn">
                 {this.props.user.name.slice(0, 1).capitalize()}
               </button>
-              <ul className="profile-dropdown">
+              <ul className="profile-dropdown dropdown">
                 <li>Profile</li>
                 <li>Settings</li>
                 <li onClick={() => this.signOut()}>Sign out</li>
@@ -89,7 +171,7 @@ class Header extends React.Component {
     return (
       <div className="bg-white h-20 w-full flex justify-between shadow-md mb-4 z-10">
         <div className="self-center p-5">
-          <Link className="text-secondary font-bold text-3xl">KanjiBlaze</Link>
+          <Link to={this.props.user.isLoggedIn ? "/dashboard" : "/"} className="text-secondary font-bold text-3xl">KanjiBlaze</Link>
         </div>
         {this.renderNav()}
       </div>

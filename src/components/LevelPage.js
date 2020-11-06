@@ -54,11 +54,11 @@ class LevelPage extends React.Component {
       const { levelsInfo } = this.props
 
       const radProgress = levelsInfo[level].radicalProgress;
-      const radTotal = levels[level].noOfRadicals;
+      const radTotal = radicals.length;
       const kanProgress = levelsInfo[level].kanjiProgress;
-      const kanTotal = levels[level].noOfKanji;
+      const kanTotal = kanji.length;
       const vocProgress = levelsInfo[level].vocabProgress;
-      const vocTotal = levels[level].noOfVocab;
+      const vocTotal = vocabulary.length;
       
       return (
         <div>

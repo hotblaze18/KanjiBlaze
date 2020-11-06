@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
     return (
       <div>
         <Header />
-        <div id="dashboard" className="grid py-10 grid-cols-2 md:grid-cols-3 px-10 w-full col-gap-8 row-gap-8">
+        <div id="dashboard" className="grid py-10 px-5 grid-cols-2 md:grid-cols-3 md:px-10 w-full col-gap-8 row-gap-8">
           <LessonPanel />
           <ReviewsPanel />
           {this.props.sessionStarted ? this.renderResumeButton() : ""}

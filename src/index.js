@@ -7,6 +7,7 @@ import reduxThunk from "redux-thunk";
 import App from "./components/App";
 import Reducers from "./reducers";
 import { loadState, saveState } from "./localStorage";
+import "./globalEventListeners";
 
 const persistedState = loadState();
 
