@@ -19,7 +19,7 @@ class Dashboard extends React.Component {
   renderResumeButton() {
     if (this.props.sessionType === "lesson") {
       return (
-        <div className="mt-4 col-start-1 col-end-3 justify-self-center">
+        <div className="mt-4 row-start-2 col-start-1 col-end-3 justify-self-center">
           <Link className="btn-2" to="lesson/session">
             Resume Session
           </Link>
@@ -27,7 +27,7 @@ class Dashboard extends React.Component {
       );
     } else
       return (
-        <div className="mt-4 col-start-1 col-end-3 justify-self-center">
+        <div className="mt-4 row-start-2 col-start-1 col-end-3 justify-self-center">
           <Link className="btn-2" to="reviews/session">
             Resume Session
           </Link>

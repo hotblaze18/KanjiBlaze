@@ -670,10 +670,6 @@ ul.multi-character-grid li[class|="vocabulary"] {
 
 /* ---------------- */
 
-#dashboard {
-  grid-template-rows: 4;
-}
-
 #lesson-panel {
   grid-column-start: 1;
   grid-column-end: 2;
@@ -691,8 +687,8 @@ ul.multi-character-grid li[class|="vocabulary"] {
 #review-forecast {
   grid-column-start: 1;
   grid-column-end: -1;
-  grid-row-start: 3;
-  grid-row-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 5;
   background-color: #f4f4f4;
 }
 
@@ -708,8 +704,8 @@ ul.multi-character-grid li[class|="vocabulary"] {
 #level-progress {
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
   background-color: #f4f4f4;
 }
 
