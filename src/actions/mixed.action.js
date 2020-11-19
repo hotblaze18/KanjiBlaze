@@ -6,7 +6,7 @@ import { createSession } from "./session.action";
 import { doProgressUpdate } from "./updates.action";
 import { fetchUser } from "./user.action";
 import levels from "../info";
-import { UNLOCK_CARDS, UPDATE_LEVEL } from "../reducers/action_names";
+import { UNLOCK_CARDS, UPDATE_LEVELS_INFO } from "../reducers/action_names";
 
 const fetchCardsAndLevelsInfo = () => {
   return async (dispatch) => {
@@ -48,25 +48,27 @@ const unlockCardsAndUpdate = () => {
       };
       console.log("entered");
       if (
-        canUnlockCardsAndUpdateLevelInfo(currLevelInfo, user, unlockReqBody)
+        canUnlockCardsAndUpdateLevelInfo(currLevelInfo, user, unlockReqBody) === true
       ) {
-        //Add unlock cards to global updates
-        dispatch({
-          type: "ADD_UNLOCK",
-          unlock: unlockReqBody,
-        });
+        //Add unlock cards to global updates if they exist and also the levelsInfo
+        if(unlockReqBody.type !== "") {
+          dispatch({
+            type: "ADD_UNLOCK",
+            unlock: unlockReqBody,
+          });
 
-        //change the unlocked state of the levelInfo
-        levelsInfo[lvl] = currLevelInfo;
-
+          //change the unlocked(rad,kan,voc) state of the levelInfo
+          levelsInfo[lvl] = currLevelInfo;
+        }
+        console.log(currLevelInfo);
         //if level has to change then add new level to global updates
-        if (currLevelInfo.kanjiProgress >= 90) {
+        if ((currLevelInfo.kanjiProgress/levels[lvl].noOfKanji)*100 >= 90) {
           dispatch({
             type: "ADD_UPDATE_LEVEL",
             newLevel: lvl + 1,
           });
           //set the starting time of this new level to now in levels Info
-          levelsInfo[lvl + 1].startedAt = currLevelInfo;
+          levelsInfo[lvl + 1].startedAt = Date.now();
         }
         //add new levelsInfo to global updates
         dispatch({
@@ -74,6 +76,7 @@ const unlockCardsAndUpdate = () => {
           levelsInfo,
         });
         console.log("Added to global updates.");
+
         //set unlock for appropriate cards and refelct in app state
         const start = levels[lvl].start;
         const end = levels[lvl].end;
@@ -84,13 +87,14 @@ const unlockCardsAndUpdate = () => {
           }
         }
         dispatch({ type: UNLOCK_CARDS, cards });
+
         //update the levels info in application state
         dispatch({
-          type: UPDATE_LEVEL,
+          type: UPDATE_LEVELS_INFO,
           level: lvl,
           levelInfo: currLevelInfo,
         });
-        if (currLevelInfo.kanjiProgress >= 90) {
+        if ((currLevelInfo.kanjiProgress/levels[lvl].noOfKanji)*100 >= 90) {
           dispatch({
             type: "UPDATE_USER",
             updates: { currLevel: user.currLevel },
@@ -125,6 +129,9 @@ const canUnlockCardsAndUpdateLevelInfo = (currLevelInfo, user, reqBody) => {
   } else if (!currLevelInfo.vocabUnlocked && kanPercentProgress >= 90) {
     currLevelInfo.vocabUnlocked = true;
     reqBody.type = "vocabulary";
+    user.currLevel += 1;
+    return true;
+  } else if(kanPercentProgress >= 90) {
     user.currLevel += 1;
     return true;
   }
