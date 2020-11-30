@@ -64,7 +64,7 @@ const LevelBox = (props) => {
             <li key={card.cardNo} class={`${type}-${card.cardNo} character-item`}>
               <a href={`${link}/${card.cardNo}`}>
                 <span class="character" lang="ja">
-                  {card.cardBody}
+                {card.cardBody ? card.cardBody : <img src={`/imgs/${card.cardMeaning[0].toLowerCase()}.png`} alt={card.cardMeaning[0]}></img>}
                 </span>
                 <ul>
                   <li lang="ja" className="text-center">
