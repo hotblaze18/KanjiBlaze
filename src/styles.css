@@ -16,6 +16,12 @@
   }
 }
 
+@media screen and (max-width: 300px) {
+  html {
+    font-size: 70%;
+  }
+}
+
 /* @media screen and (max-width: 640px) {
   html {
     font-size: 70%;
@@ -171,6 +177,7 @@ input:focus {
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0 2rem;
+  width: 100%;
 }
 
 @media screen and (min-width: 768px) {
@@ -508,6 +515,12 @@ ul.multi-character-grid li[class|="vocabulary"] {
   visibility: hidden;
 }
 
+@media screen and (min-width: 400px) {
+  #main-menu li button {
+    font-size: 1.25rem;
+  }
+}
+
 @media screen and (min-width: 768px) {
   #main-menu {
     flex-direction: row;
@@ -518,6 +531,11 @@ ul.multi-character-grid li[class|="vocabulary"] {
     visibility: visible;
     padding-top: 0;
   }
+
+  #main-menu li button {
+    font-size: 1rem;
+  }
+
 }
 
 #main-menu li {
