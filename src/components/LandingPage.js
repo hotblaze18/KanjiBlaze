@@ -20,16 +20,23 @@ const LandingPage = () => {
             <h2>
                 Learn with Mnemnonics
             </h2>
-            <p className="text-justify text-md text-white leading-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto est officia delectus nobis aspernatur! Iusto eveniet consequatur nisi distinctio asperiores mollitia ad sunt praesentium corporis quaerat, facilis perspiciatis. Iusto, minima.
+            <p className="text-justify text-xl text-white leading-6">
+            Each and every Radical, Kanji and Vocabulary comes with Mnemnonics. These menemonics help you to remember
+            both the meaning and visualization of the particualr symbol. Learning with mnemonics is a proven method to allow for
+            fast memorization and a long term recall. So what are you waiting for? Go ahead and dive straight in the world of awesome
+            menemonics helping you in your learning journey.
             </p>
         </div>
         <div className="m-auto mb-5 px-6 py-5 description-info">
             <h2>
                 What is Spaced Repition System?
             </h2>
-            <p className="text-justify text-md text-white leading-6">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto est officia delectus nobis aspernatur! Iusto eveniet consequatur nisi distinctio asperiores mollitia ad sunt praesentium corporis quaerat, facilis perspiciatis. Iusto, minima.</p>
+            <p className="text-justify text-xl text-white leading-6">
+            Spaced Repetion System is a method where all the Radicals, Kanji and Vocabulary that you have learned are presented
+            to you after repeating intervals so that they fit in your long term meomory and you dont forget them easily. We use an
+            algorithm which on the basis of the number of correct and incorrect answers made decides the best possible time to show
+            you a piece of learning again. This helps you to retain even hardest of stuff over a period of time.
+            </p>
         </div>
     </div>
     <div className="composition-wrapper">
